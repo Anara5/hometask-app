@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from '../Components/NavBar';
 import image from '../Images/doodle-sketch-cocktails.jpg';
 
-const Home = props => {
+const Home = () => {
 
     const title = 'Welcome to the Cocktail Explorer!';
 

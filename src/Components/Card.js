@@ -1,24 +1,17 @@
-import React, {Component} from "react";
+import React from "react";
+import { Link } from 'react-router-dom';
 
 
-class Card extends Component {
-    render() {
-        const {cocktails} = this.props.getCocktails;
-
+const Card = ({name, image}) => {
 
         return (
-            <div>
-            {cocktails.map((cocktail, index) => (
-                <div key={index}>
-                    <div {...cocktail}>
-                        <p>{cocktail.name}</p>
-                        <img {...cocktail.image}></img>
-                        <p>{cocktail.preparation}</p>
-                    </div>
-                </div>
-            ))}
+            <div className="drink-card">
+                <p>{name}</p>
+                <Link to={`/drinks/${name.toLowerCase()}`}>
+                
+                <img src={image} />
+                </Link>
             </div>
         )
     }
-}
 export default Card;

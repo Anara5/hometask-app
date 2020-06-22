@@ -1,8 +1,9 @@
 import React from 'react';
 import NavBar from '../Components/NavBar';
-import Searcher from '../Components/Drinks';
+import Searcher from '../Components/Searcher';
 
-const Explore = props => {
+
+const Explore = () => {
 
     const title = 'Find your favourite drink!';
 
@@ -16,7 +17,7 @@ const Explore = props => {
             <h1 id="titleExplorer">{title}</h1>
 
            <Searcher />
-            
+           
         </div>
     </div>
     )
