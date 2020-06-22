@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from '../Components/NavBar';
 import Searcher from '../Components/Searcher';
 
-
 const Explore = () => {
 
     const title = 'Find your favourite drink!';

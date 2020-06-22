@@ -3,8 +3,6 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Home from './Pages/Home';
 import Explore from './Pages/Explore';
 import NotFound from './Components/NotFound';
-import Card from './Components/Card';
-
 
 const App = () => {
   return (
@@ -13,8 +11,7 @@ const App = () => {
       <Switch>
         <Route path="/" exact={true} title="home" component={Home} />
         <Route path="/explore" title="explore" component={Explore} />
-        <Route path="/drinks/:name" title="drinks" component={Card} />
-        <Route path="/not-found" title="notFound" component={NotFound} />
+        <Route path="/" title="notFound" component={NotFound} />
       </Switch>
     </div>
     </BrowserRouter>
