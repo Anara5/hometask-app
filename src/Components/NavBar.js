@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
-const NavBar = props => {
+const NavBar = () => {
     return (
     <div>
         <div>

@@ -1,26 +1,15 @@
 import React from 'react';
-import data from '../Data/drinks.json';
-import CardFullInformation from '../Components/CardFullInformation';
 
-const Preparation = () => {
+const Preparation = (drink) => {
 
     return (
-        <div>
-        {
-            data.cocktails.map((cocktail, name) => {
-                return (
-                    <CardFullInformation 
-                    key={name}
-                    name={cocktail.name}
-                    preparation={cocktail.preparation}
-                    image={cocktail.image}
-                    />
-                )
-            })
-        }
+        
+        <div className="drink-details">
+        <p>Name: {drink.name}</p>
+        <p>Preparation</p>
+        <p>{drink.preparation}</p>
+        <img style={{height: 300, width: 300}} src={drink.image} alt="cocktail"/>
         </div>
     )
-
-
 }
 export default Preparation;

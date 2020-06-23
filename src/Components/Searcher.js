@@ -1,53 +1,61 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Card from '../Components/Card';
 import data from '../Data/drinks.json';
-//import axios from 'axios';
 
-class Searcher extends React.Component {
+function searchingFor(search) {
+    return function(drinks) {
+        return drinks.name.toLowerCase().includes(search.toLowerCase()) || !search;
+    }
+}
 
-   state = {
-       search: ""
-   };
+export default class Searcher extends React.Component {
 
-    onchange = e => {
-        this.setState({ search: e.target.value });
+    constructor(props) {
+        super(props);
+        this.state = {
+            search: '',
+            data: data
+        };
+    }
+
+    updateSearch = (event) => {
+        this.setState({ search: event.target.value.substr(0, 20)});
+    };
+
+    onSubmit = e => {
+        e.preventDefault();
+        console.log(this.state.search)
     };
 
     render() {
-        /*
-        const {search} = this.state;
-        const filteredDrinks = data.filter(cocktail => {
-            return cocktail.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-        });
-        */
 
-        return(
+        const {search, data} = this.state;
+
+        return (
             <div className="search">
-                <form>
+                <form onSubmit={e => this.onSubmit(e)}>
                     <div>
-                        <input type="text" id="input" onChange={this.onchange}></input>
+                        <input type="text"
+                        id="input" 
+                        value={search}
+                        onChange={this.updateSearch.bind(this)}></input>
+                        
                         <button>Search</button>
                     </div>
                 </form>
                 
                 <div>
-                
-                {
-                    data.cocktails.map((cocktail, name) => {
+                { data.cocktails.filter(searchingFor(search)).map((cocktail) => {
                         return (
                             <Card 
-                            key={name}
+                            key={cocktail.name}
                             name={cocktail.name}
-                            image={cocktail.image}                            
+                            src={cocktail.image}                    
                             />
                         )
-                    })
-                }
+                    })}
                 </div>
             </div>
         );
     }
 }
-export default Searcher;
-
-//onChange={e => setSearch(e.target.value)}
