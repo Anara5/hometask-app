@@ -1,12 +1,11 @@
 import React from 'react';
 import NavBar from '../Components/NavBar';
-import data from '../Data/drinks.json';
 
 export default ({cocktail}) => (
+
     
     <div className="drink-details">
 
-    <NavBar />
     <p>Ordinary Drink</p>
 
         <div>

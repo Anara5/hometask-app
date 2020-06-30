@@ -1,0 +1,6 @@
+[0630/193223.742:ERROR:process_reader_win.cc(108)] process 18188 not found
+[0630/193223.743:ERROR:exception_snapshot_win.cc(98)] thread ID 19420 not found in process
+[0630/193223.743:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Ett försök gjordes att använda en befintlig process. (0xc000010a)
+[0630/202004.106:ERROR:process_reader_win.cc(151)] SuspendThread: Åtkomst nekad. (0x5)
+[0630/202004.106:ERROR:exception_snapshot_win.cc(98)] thread ID 13824 not found in process
+[0630/202004.106:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Ett försök gjordes att använda en befintlig process. (0xc000010a)

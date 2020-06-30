@@ -1,9 +1,9 @@
-import React from 'react';
-import Card from '../Components/Card';
-import data from '../Data/drinks.json';
-import Preparation from '../Pages/Preparation';
-import { Link } from 'react-router-dom';
-import _, { update } from 'lodash';
+import React, { useState } from "react";
+import Card from "../Components/Card";
+import data from "../Data/drinks.json";
+import Preparation from "../Pages/Preparation";
+import { Link } from "react-router-dom";
+import _, { update } from "lodash";
 
 function searchingFor(search) {
     return function(cocktails) {
@@ -18,7 +18,7 @@ export default class Searcher extends React.Component {
         this.state = {
             search: '',
             data: data,
-            show: null,
+            show: null
         };
         this.clickMe = this.clickMe.bind(this);
     }
@@ -66,9 +66,11 @@ export default class Searcher extends React.Component {
                
 
                 <div>
+                { data.cocktails.filter(searchingFor(search)).length===0 && <p>The drink is not found / no result</p> }  
+                
                 { data.cocktails.filter(searchingFor(search)).map((cocktail, i) => {
                         return (
-                            <Link to="/explore/preparation" onClick={this.clickMe.bind(this, cocktail)}>
+                            <Link to={`explore/preparation`} onClick={this.clickMe.bind(this, cocktail)}>
                             <Card
                             key={i}
                             name={cocktail.name}
