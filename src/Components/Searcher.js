@@ -3,7 +3,7 @@ import Card from '../Components/Card';
 import data from '../Data/drinks.json';
 import Preparation from '../Pages/Preparation';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
+import _, { update } from 'lodash';
 
 function searchingFor(search) {
     return function(cocktails) {
@@ -25,29 +25,23 @@ export default class Searcher extends React.Component {
 
     updateSearch = (event) => {
         this.setState({ search: event.target.value.substr(0, 20)});
-        console.log('no')
     }
 
     onSubmit = e => {
         e.preventDefault();
-        console.log(this.state.search);
+        //console.log(this.state.seach)
+        this.setState({searchingFor})
     };
+
     
     clickMe = show => {
-        console.log(show);
+        //console.log(show);
         this.setState({show})
-        }
+        };
 
     render() {
 
         const {search, data} = this.state;
-
-        const messageShow = () => {
-            
-            if (search === false) {
-                return <p>not found</p>;
-            }
-        }
         
 
         return (
@@ -59,11 +53,12 @@ export default class Searcher extends React.Component {
                         id="input" 
                         value={search}
                         onChange={this.updateSearch.bind(this)}></input>
+
                         <button>Search</button>
                     </div>
                 </form>
 
-                {messageShow()}
+                
 
                 <div className="container">
                 {this.state.show ? <Preparation cocktail={this.state.show} /> : null}
