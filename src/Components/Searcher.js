@@ -1,7 +1,9 @@
 import React from 'react';
 import Card from '../Components/Card';
 import data from '../Data/drinks.json';
-import Preparation from './Preparation';
+import Preparation from '../Pages/Preparation';
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
 function searchingFor(search) {
     return function(cocktails) {
@@ -16,26 +18,37 @@ export default class Searcher extends React.Component {
         this.state = {
             search: '',
             data: data,
-            visible: false
+            show: null,
         };
+        this.clickMe = this.clickMe.bind(this);
     }
 
     updateSearch = (event) => {
         this.setState({ search: event.target.value.substr(0, 20)});
-    };
+        console.log('no')
+    }
 
     onSubmit = e => {
         e.preventDefault();
-        console.log(this.state.search)
+        console.log(this.state.search);
     };
-
-    clickMe (cocktail) {
-        console.log(cocktail);
-    }
+    
+    clickMe = show => {
+        console.log(show);
+        this.setState({show})
+        }
 
     render() {
 
         const {search, data} = this.state;
+
+        const messageShow = () => {
+            
+            if (search === false) {
+                return <p>not found</p>;
+            }
+        }
+        
 
         return (
             <div className="search">
@@ -49,17 +62,25 @@ export default class Searcher extends React.Component {
                         <button>Search</button>
                     </div>
                 </form>
-            {this.state.visible ? <Preparation /> : null}    
+
+                {messageShow()}
+
+                <div className="container">
+                {this.state.show ? <Preparation cocktail={this.state.show} /> : null}
+                </div>
+               
+
                 <div>
-                { data.cocktails.filter(searchingFor(search)).map((cocktail) => {
+                { data.cocktails.filter(searchingFor(search)).map((cocktail, i) => {
                         return (
-                            <a onClick={this.clickMe.bind(this, cocktail)}>
-                            <Card 
-                            key={cocktail.name}
+                            <Link to="/explore/preparation" onClick={this.clickMe.bind(this, cocktail)}>
+                            <Card
+                            key={i}
                             name={cocktail.name}
-                            src={cocktail.image}                    
+                            preparation={cocktail.preparation}
+                            src={cocktail.image}              
                             />
-                            </a>
+                            </Link>
                         )
                     })}
                 </div>

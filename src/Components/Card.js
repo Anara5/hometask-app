@@ -1,7 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import Preparation from "./Preparation";
-
 
 const Card = ({name, src}) => {
 

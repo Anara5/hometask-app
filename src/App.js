@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Home from './Pages/Home';
 import Explore from './Pages/Explore';
 import NotFound from './Components/NotFound';
-import Preparation from './Components/Preparation';
+import Preparation from './Pages/Preparation';
 
 const App = () => {
 
@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/" exact={true} title="home" component={Home} />
         <Route path="/explore" title="explore" component={Explore} />
         <Route path="/" title="notFound" component={NotFound} />
-        <Route path="/preparation" title="preparation" component={Preparation} />
+        <Route path="/explore/preparation" title="preparation" component={Preparation} />
       </Switch>
     </div>
     </BrowserRouter>
