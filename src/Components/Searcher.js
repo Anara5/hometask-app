@@ -1,85 +1,50 @@
-import React from 'react';
-import Card from '../Components/Card';
-import data from '../Data/drinks.json';
-import Preparation from '../Pages/Preparation';
-import { Link } from 'react-router-dom';
-import _, { update } from 'lodash';
+import React, { useState } from "react";
+import Card from "../Components/Card";
+import data from "../Data/drinks.json";
+import Preparation from "../Pages/Preparation";
+import { Link } from "react-router-dom";
+import _, { update } from "lodash";
 
-function searchingFor(search) {
-    return function(cocktails) {
-        return cocktails.name.toLowerCase().includes(search.toLowerCase()) || !search;
-    }
-}
+const Searcher = () => {
+  const [searchItem, setSearchItem] = useState("");
+  const [item, setItem] = useState(data);
+  const [newData, setnewData] = useState(data.cocktails);
 
-export default class Searcher extends React.Component {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const found = item.cocktails.filter(
+      (search) => search.name.toLowerCase() === searchItem.toLowerCase()
+    );
+    setnewData(found);
+  };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            search: '',
-            data: data,
-            show: null,
-        };
-        this.clickMe = this.clickMe.bind(this);
-    }
+  const handleChange = (e) => {
+    setSearchItem(e.target.value);
+  };
 
-    updateSearch = (event) => {
-        this.setState({ search: event.target.value.substr(0, 20)});
-    }
+  return (
+    <React.Fragment>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="search">
+          <input type="text" onChange={handleChange} />
+        </label>
+        <input type="submit" value="search" />
+      </form>
+      <div>
+        {newData.length > 0 ? (
+          newData.map((cocktail) => (
+            <Card
+              key={cocktail.name}
+              name={cocktail.name}
+              src={cocktail.image}
+            />
+          ))
+        ) : (
+          <div>Not found </div>
+        )}
+      </div>
+    </React.Fragment>
+  );
+};
 
-    onSubmit = e => {
-        e.preventDefault();
-        //console.log(this.state.seach)
-        this.setState({searchingFor})
-    };
-
-    
-    clickMe = show => {
-        //console.log(show);
-        this.setState({show})
-        };
-
-    render() {
-
-        const {search, data} = this.state;
-        
-
-        return (
-            <div className="search">
-            
-                <form onSubmit={e => this.onSubmit(e)}>
-                    <div>
-                        <input type="text"
-                        id="input" 
-                        value={search}
-                        onChange={this.updateSearch.bind(this)}></input>
-
-                        <button>Search</button>
-                    </div>
-                </form>
-
-                
-
-                <div className="container">
-                {this.state.show ? <Preparation cocktail={this.state.show} /> : null}
-                </div>
-               
-
-                <div>
-                { data.cocktails.filter(searchingFor(search)).map((cocktail, i) => {
-                        return (
-                            <Link to="/explore/preparation" onClick={this.clickMe.bind(this, cocktail)}>
-                            <Card
-                            key={i}
-                            name={cocktail.name}
-                            preparation={cocktail.preparation}
-                            src={cocktail.image}              
-                            />
-                            </Link>
-                        )
-                    })}
-                </div>
-            </div>
-        );
-    }
-}
+export default Searcher;
