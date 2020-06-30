@@ -2,7 +2,7 @@ import React from "react";
 import Card from "../Components/Card";
 import data from "../Data/drinks.json";
 import { Link } from "react-router-dom";
-import _ from "lodash";
+import _, { update } from "lodash";
 
 function searchingFor(search) {
     return function(cocktails) {
@@ -28,8 +28,13 @@ export default class Searcher extends React.Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.setState(this.state.seach)
+        this.setState(this.state.search)
     };
+
+    onClick = e => {
+        e.preventDefault();
+        this.setState({searchingFor})
+    }
 
     
     clickMe = show => {
@@ -51,7 +56,7 @@ export default class Searcher extends React.Component {
                         value={search}
                         onChange={this.updateSearch.bind(this)}></input>
 
-                        <button>Search</button>
+                        <button onClick={e => this.onClick(e)}>Search</button>
                     </div>
                 </form>
 
@@ -76,9 +81,3 @@ export default class Searcher extends React.Component {
         );
     }
 }
-
-/*
-<div className="container">
-                {this.state.show ? <Preparation cocktail={this.state.show} /> : null}
-                </div>
-                */
