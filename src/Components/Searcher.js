@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from "../Components/Card";
 import data from "../Data/drinks.json";
-import Preparation from "../Pages/Preparation";
 import { Link } from "react-router-dom";
-import _, { update } from "lodash";
+import _ from "lodash";
 
 function searchingFor(search) {
     return function(cocktails) {
@@ -29,15 +28,13 @@ export default class Searcher extends React.Component {
 
     onSubmit = e => {
         e.preventDefault();
-        //console.log(this.state.seach)
-        this.setState({searchingFor})
+        this.setState(this.state.seach)
     };
 
     
     clickMe = show => {
-        //console.log(show);
         this.setState({show})
-        };
+    }
 
     render() {
 
@@ -58,21 +55,15 @@ export default class Searcher extends React.Component {
                     </div>
                 </form>
 
-                
-
-                <div className="container">
-                {this.state.show ? <Preparation cocktail={this.state.show} /> : null}
-                </div>
-               
-
                 <div>
                 { data.cocktails.filter(searchingFor(search)).length===0 && <p>The drink is not found / no result</p> }  
                 
-                { data.cocktails.filter(searchingFor(search)).map((cocktail, i) => {
+                { data.cocktails.filter(searchingFor(search)).map((cocktail, name) => {
                         return (
-                            <Link to={`explore/preparation`} onClick={this.clickMe.bind(this, cocktail)}>
+                            
+                            <Link to={`/preparation/${cocktail.name}`} onClick={this.clickMe.bind(this, cocktail)}>
                             <Card
-                            key={i}
+                            key={name}
                             name={cocktail.name}
                             preparation={cocktail.preparation}
                             src={cocktail.image}              
@@ -85,3 +76,9 @@ export default class Searcher extends React.Component {
         );
     }
 }
+
+/*
+<div className="container">
+                {this.state.show ? <Preparation cocktail={this.state.show} /> : null}
+                </div>
+                */

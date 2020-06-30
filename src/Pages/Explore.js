@@ -1,7 +1,6 @@
 import React from 'react';
 import NavBar from '../Components/NavBar';
 import Searcher from '../Components/Searcher';
-import Preparation from './Preparation';
 
 const Explore = () => {
 

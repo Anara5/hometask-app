@@ -1,17 +1,24 @@
 import React from 'react';
 import NavBar from '../Components/NavBar';
+import data from '../Data/drinks.json';
 
-export default ({cocktail}) => (
+const Preparation = (props) => {
 
-    
-    <div className="drink-details">
+    const cocktailName = props.match.params.name;
+    const cocktail = data.cocktails.filter((cocktail) => cocktail.name === cocktailName)[0];
 
-    <p>Ordinary Drink</p>
-
-        <div>
-        <h1>{cocktail.name}</h1>
-        <p>{cocktail.preparation}</p>
-        <img style={{height: 250, width: 250}} src={cocktail.image} alt="cocktail"/>
+    return (
+        <div className="Page">
+            <header className="Header">
+                <NavBar />
+            </header>
+            <div className="drink">
+            <p>Ordinary Drink</p>
+            <h2>{cocktail.name}</h2>
+            <p>{cocktail.preparation}</p>
+            <img style={{height: 500, width: 500}} src={cocktail.image} alt="cocktail"/>
+            </div>
         </div>
-        </div>
-)
+    )
+}
+export default Preparation;
