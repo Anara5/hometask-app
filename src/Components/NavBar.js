@@ -1,16 +1,20 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
-    return (
+  return (
     <div>
-        <div>
+      <div>
         <nav className="navigation">
-            <NavLink className="navlink" to="/" exact={true}>Home</NavLink>
-            <NavLink className="navlink" to="/explore" exact={true}>Explore</NavLink>
+          <NavLink className="navlink" to="/" exact={true}>
+            Home
+          </NavLink>
+          <NavLink className="navlink" to="/explore" exact={true}>
+            Explore
+          </NavLink>
         </nav>
-        </div>
+      </div>
     </div>
-    );
-}
+  );
+};
 export default NavBar;

@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import Card from "../Components/Card";
 import data from "../Data/drinks.json";
-import Preparation from "../Pages/Preparation";
 import { Link } from "react-router-dom";
-import _, { update } from "lodash";
 
 const Searcher = () => {
   const [searchItem, setSearchItem] = useState("");
-  const [item, setItem] = useState(data);
   const [newData, setnewData] = useState(data.cocktails);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const found = item.cocktails.filter(
+    const found = data.cocktails.filter(
       (search) => search.name.toLowerCase() === searchItem.toLowerCase()
     );
     setnewData(found);
@@ -30,14 +27,16 @@ const Searcher = () => {
         </label>
         <input type="submit" value="search" />
       </form>
-      <div>
+      <div className="cards">
         {newData.length > 0 ? (
           newData.map((cocktail) => (
-            <Card
-              key={cocktail.name}
-              name={cocktail.name}
-              src={cocktail.image}
-            />
+            <Link to={`/preparation/${cocktail.name}`} key={cocktail.name}>
+              <Card
+                key={cocktail.name}
+                name={cocktail.name}
+                src={cocktail.image}
+              />
+            </Link>
           ))
         ) : (
           <div>Not found </div>
